@@ -1,16 +1,15 @@
 import React from 'react'
-import {BrowserRouter as Router} from 'react-router-dom'
-import {Provider} from 'react-redux'
-
 import {connect} from 'react-redux'
-//Styles
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 //Components
-import Menu from './Menu/Menu';
-import View from './View/View'
+import Menu from "./Menu/Menu";
+import View from "./View/View";
+
 //Views
 import Main from '../views/Main';
 import Demo from '../views/Demo';
+
+import Styles from '../styles/AppStyles.scss';
 
 const views = [
     {name: 'Main', link: '/', component: Main, exact: true},
@@ -20,21 +19,20 @@ const views = [
 class App extends React.Component {
     render() {
         return (
-            <Provider store={this.props.store}>
-                <Router>
-                    <div className="container-fluid">
-                        <div className="row">
 
-                            <Menu menuItems={views}/>
+            <div id="outer-container">
+                <Menu menuItems={views}/>
 
-                            <div className='container-content col-10 offset-2'>
-                                {views.map((view) => <View key={view.name} item={view}/>)}
-                            </div>
 
-                        </div>
+                <main id="page-wrap">
+                    <div className="container-top-bar">
+                        <div className="top-bar"></div>
                     </div>
-                </Router>
-            </Provider>
+                    <div className="container-views">
+                        {views.map((view) => <View key={view.name} item={view}/>)}
+                    </div>
+                </main>
+            </div>
         )
     }
 }

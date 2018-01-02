@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 import { createStore } from 'redux'
 import RootReducer from './reducers/RootReducer'
-import App from './components/App'
+import Root from './components/Root'
 
 let store = createStore(RootReducer);
 
-ReactDOM.render( <App store={store} />, document.getElementById('root') );
+ReactDOM.render( <Root store={store} />, document.getElementById('root') );

@@ -42,7 +42,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+                use: ['style-loader', 'css-loader', 'sass-loader']
             },
             {
                 test: /\.(gif|png|jpe?g|svg)$/i,
@@ -74,5 +74,7 @@ module.exports = {
             }
         ]
     },
-    plugins: [HtmlWebpackPluginConfig, new UglifyJsPlugin()]
+    plugins: [HtmlWebpackPluginConfig
+        // , new UglifyJsPlugin()
+    ]
 }

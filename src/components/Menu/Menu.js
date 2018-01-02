@@ -1,20 +1,31 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 import {connect} from 'react-redux'
+
+import {action as toggleMenu} from 'redux-burger-menu';
+
+
+import BurgerMenu from './ReduxBurgerMenu';
 
 import Styles from './styles/Menu.scss';
 
 class Menu extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     renderMenuItems() {
         const items = this.props.menuItems.map((menuItem, index) => (
-            <li className="nav-item" key={menuItem.name}>
-                <NavLink exact className="nav-link" to={menuItem.link}>{menuItem.name}</NavLink>
-            </li>
+            <NavLink
+                exact
+                key={index}
+                className="nav-link"
+                to={menuItem.link}
+                onClick={
+                    () => {
+                        this.props.toggleMenu(false);
+                    }
+                }
+            >
+                <span>{menuItem.name}</span>
+            </NavLink>
         ));
 
         return items;
@@ -24,27 +35,17 @@ class Menu extends React.Component {
     render() {
 
         return (
-            <div className="container-menu col-2">
-                <div className="container-logo">
+            <BurgerMenu pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
+                {this.renderMenuItems()}
+            </BurgerMenu>
+        );
 
-                </div>
-
-                <ul className="nav flex-column">
-                    {this.renderMenuItems()}
-                </ul>
-
-                <h6>
-                   App status: {this.props.status}
-                </h6>
-
-            </div>
-        )
     }
 
 }
 
-function mapStateToProps(state) {
-    return state;
+const mapDispatchToProps = {
+    toggleMenu
 }
 
-export default connect(mapStateToProps, null, null, {pure: false})(Menu);
+export default connect(null, mapDispatchToProps)(Menu);
